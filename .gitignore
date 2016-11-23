@@ -1,0 +1,7 @@
+#
+# GIT IGNORE the following files 
+#
+
+*~
+*.o
+build/*
