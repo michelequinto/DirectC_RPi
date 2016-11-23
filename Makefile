@@ -16,14 +16,14 @@ CC = gcc
 CPP = g++
 CFLAGS = -Wall $(FLAGS) $(DEBUG_LEVEL) $(INCS)
 CPPFLAGS = $(CFLAGS) 
-CPPFLAGS += -fpermissive
+CPPFLAGS += -Wc++0x-compat -fpermissive
 
 all: $(OBJS) $(TARGS) 
 
 obj/%.o: src/%.c
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
-$(TARGS): $(TARG_SRCS)
+$(TARGS): $(TARG_SRCS) $(OBJS)
 	$(CPP) $(CPPFLAGS) $(INCS) $(OBJS) $< -o $@ $(LIBS)
 
 clean: 

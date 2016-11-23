@@ -59,8 +59,6 @@ int main(int ac, char** av) {
   }
   // END cmdLine parser
 
- 
-
   std::ifstream is (fname.c_str(), std::ifstream::binary);
   if (!is) {
     cout << "[ERROR] Invalid file exiting..." << endl;
@@ -85,7 +83,11 @@ int main(int ac, char** av) {
   
   print_menu();
 
-  while( cin >> Action_code ){
+  unsigned int action_code = 0;
+  while( cin >> action_code ){
+    if( action_code == 0 )
+      break;
+    Action_code = static_cast<DPUCHAR>(action_code);
     dp_top();
     std::cout << "\n[INFO] Exit code: " << static_cast<int>(error_code) << std::endl;
     print_menu();
@@ -94,7 +96,6 @@ int main(int ac, char** av) {
   // close and cleanup
   delete[] buffer;
   is.close();
-
   exit(0);
 } 
 
@@ -127,5 +128,5 @@ void print_menu(){
   for( action_mapT::const_iterator it = action_map.begin();
        it != action_map.end(); ++it )
     cout << std::setw(2) << std::left << it->first << std::right << " - " << it->second << endl;
-  cout << "** Please select an action code by entering the corresponding number **" << endl;
+  cout << "** Please select an action code by entering the corresponding number or 0 to QUIT **" << endl;
 }

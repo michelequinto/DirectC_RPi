@@ -154,7 +154,7 @@ void dp_get_and_DRSCAN_in_out(DPUCHAR Variable_ID,DPUCHAR total_bits_to_shift, D
 ****************************************************************************/
 void goto_jtag_state(DPUCHAR target_state, DPUCHAR cycles)
 {
-  printf("\r\ngoing to state: %s\n", decode_jtag_state(target_state));
+  //printf("\r\ngoing to state: %s\n", decode_jtag_state(target_state));
     DPUCHAR count = 0u;
     DPUCHAR tms_bits = 0u;
     if (target_state != current_jtag_state)
