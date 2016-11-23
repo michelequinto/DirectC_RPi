@@ -5,6 +5,6 @@ A port of Microsemi DirectC code to RaspberryPi 3 or any other ARM platform runn
 
 
 Depends on the following packages:
-- bcm2825 
-- Boost C++
+- bcm2835 (v1.50)
+- Boost C++ (v1.55)
 
