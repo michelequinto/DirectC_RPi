@@ -1,6 +1,6 @@
 export BOOST_LIB_DIR_64=/lib/
-export BOOST_INC_DIR=/home/mquinto/boost_1_55_0/boost/
-#/usr/include/boost/include
+#export BOOST_INC_DIR=/home/mquinto/boost_1_55_0/boost/
+export BCM_LIB_DIR=/home/pi/bcm2835-1.50/src
 
 #Sharable libraries
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib

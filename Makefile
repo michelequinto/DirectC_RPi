@@ -8,10 +8,10 @@ TARGS := $(patsubst src/%.cc, build/%,$(TARG_SRCS))
 
 INCS += -I./src -I./src/JTAG -I./src/G3Algo -I./src/G4Algo -I$(BOOST_INC_DIR) 
 
-LIBS += -L$(BOOST_LIB_DIR_64) -lboost_program_options
+LIBS += -L$(BOOST_LIB_DIR_64) -lboost_program_options $(BCM_LIB_DIR)/libbcm2835.a
 
 #DEBUG_LEVEL = -g
-FLAGS = -DENABLE_FILE_SYSTEM -DENABLE_G4_SUPPORT #-DRPI_SUPPORT
+FLAGS = -DENABLE_FILE_SYSTEM -DENABLE_G4_SUPPORT -DRPI_SUPPORT
 CC = gcc
 CPP = g++
 CFLAGS = -Wall $(FLAGS) $(DEBUG_LEVEL) $(INCS)
