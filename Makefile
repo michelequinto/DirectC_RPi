@@ -14,7 +14,7 @@ LIBS += -L$(BOOST_LIB_DIR_64) -lboost_program_options $(BCM_LIB_DIR)/libbcm2835.
 FLAGS = -DENABLE_FILE_SYSTEM -DENABLE_G4_SUPPORT -DRPI_SUPPORT
 CC = gcc
 CPP = g++
-CFLAGS = -Wall $(FLAGS) $(DEBUG_LEVEL) $(INCS)
+CFLAGS = $(FLAGS) $(DEBUG_LEVEL) $(INCS)
 CPPFLAGS = $(CFLAGS) 
 CPPFLAGS += -Wc++0x-compat -fpermissive
 

@@ -99,8 +99,6 @@ extern DPULONG global_ulong2;
 extern DPUCHAR global_buf1[global_buf_SIZE]; /* General purpose global_buffer */
 extern DPUCHAR global_buf2[global_buf_SIZE];
 
-
-
 void dp_flush_global_buf1(void);
 void dp_flush_global_buf2(void);
 void dp_init_vars(void);

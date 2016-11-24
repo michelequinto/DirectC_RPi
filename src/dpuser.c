@@ -126,6 +126,19 @@ static DPUCHAR jtag_port_reg;
  * 		0, 0x80
  * 
 */
+
+DPULONGLONG delay = 0;
+
+void set_jtag_frequency(DPULONG freq){
+  if( freq < 1 || freq > 500 ){
+    printf("frequency value out of range [1..500] kHz, using 100\n", freq);
+    freq = 100;
+  }
+  float period = 1./(float)freq; //ms
+  delay = (DPULONGLONG)period*1000/2.; //us
+  printf("setting delay to: %u %f %fus\n", period, (float)period/2*1000, delay);
+}
+
 DPUCHAR jtag_inp(void)
 {
     DPUCHAR tdo = 0u;
@@ -156,6 +169,7 @@ void jtag_outp(DPUCHAR outdata)
   #ifdef RPI_SUPPORT
   /* User Specific Code */
   uint8_t val = HIGH;
+  usleep(delay); 
   if( outdata & TMS ) val = HIGH; else val = LOW;
   //printf("TMS: %u", val);
   bcm2835_gpio_write(TMS_PIN, val); // TMS
@@ -165,6 +179,7 @@ void jtag_outp(DPUCHAR outdata)
   if( outdata & TCK ) val = HIGH; else val = LOW;
   //printf(" TCK: %u\n", val);
   bcm2835_gpio_write(TCLK_PIN, val); // TCLK
+  usleep(delay);
   #endif
 }
 

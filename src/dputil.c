@@ -100,7 +100,14 @@ as long as it does not exceed 255 */
 DPUCHAR global_buf1[global_buf_SIZE];	/* General purpose global_buf1fer */
 DPUCHAR global_buf2[global_buf_SIZE];	/* global_buffer to hold UROW data */
 
-
+void dp_set_jtag_freq(DPULONG freq){
+  if( freq < 1 || freq > 500 ){
+    printf("frequency value out of range [1..500] kHz, using 100\n", freq);
+  }
+  freq = 100;  
+  delay = 1./freq/2*1000;
+  printf("setting delay to: %ius\n", delay);
+}
 
 void dp_flush_global_buf1(void)
 {

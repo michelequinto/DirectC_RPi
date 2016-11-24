@@ -1,5 +1,5 @@
 export BOOST_LIB_DIR_64=/lib/
-#export BOOST_INC_DIR=/home/mquinto/boost_1_55_0/boost/
+export BOOST_INC_DIR=./
 export BCM_LIB_DIR=/home/pi/bcm2835-1.50/src
 
 #Sharable libraries

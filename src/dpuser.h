@@ -133,6 +133,7 @@ typedef unsigned char  DPBOOL;
 typedef   signed char  DPCHAR;
 typedef   signed int   DPINT;
 typedef   signed long  DPLONG;
+typedef unsigned long long DPULONGLONG;
 
 #define DPNULL ((void*)0)
 #define TRUE 1U
@@ -144,6 +145,7 @@ typedef   signed long  DPLONG;
 extern DPUCHAR *image_buffer;
 extern DPUCHAR hardware_interface;
 extern DPUCHAR enable_mss_support;
+extern DPULONGLONG delay;
 
 DPUCHAR jtag_inp(void);
 void jtag_outp(DPUCHAR outdata);
@@ -152,6 +154,7 @@ void dp_jtag_tms(DPUCHAR tms);
 void dp_jtag_tms_tdi(DPUCHAR tms, DPUCHAR tdi);
 DPUCHAR dp_jtag_tms_tdi_tdo(DPUCHAR tms, DPUCHAR tdi);
 void dp_delay(DPULONG microseconds);
+void set_jtag_frequency(DPULONG freq);
 
 #ifdef ENABLE_DISPLAY
 #define HEX 0u
