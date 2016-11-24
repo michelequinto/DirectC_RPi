@@ -154,7 +154,7 @@ void dp_jtag_tms(DPUCHAR tms);
 void dp_jtag_tms_tdi(DPUCHAR tms, DPUCHAR tdi);
 DPUCHAR dp_jtag_tms_tdi_tdo(DPUCHAR tms, DPUCHAR tdi);
 void dp_delay(DPULONG microseconds);
-void set_jtag_frequency(DPULONG freq);
+void set_tck_period(DPULONG period);
 
 #ifdef ENABLE_DISPLAY
 #define HEX 0u

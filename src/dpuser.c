@@ -129,14 +129,9 @@ static DPUCHAR jtag_port_reg;
 
 DPULONGLONG delay = 0;
 
-void set_jtag_frequency(DPULONG freq){
-  if( freq < 1 || freq > 500 ){
-    printf("frequency value out of range [1..500] kHz, using 100\n", freq);
-    freq = 100;
-  }
-  float period = 1./(float)freq; //ms
-  delay = (DPULONGLONG)period*1000/2.; //us
-  printf("setting delay to: %u %f %fus\n", period, (float)period/2*1000, delay);
+void set_tck_period(DPULONG period){
+  delay = period/2; //us
+  //printf("setting delay to: %i\n", delay);
 }
 
 DPUCHAR jtag_inp(void)

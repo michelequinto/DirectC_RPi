@@ -40,14 +40,14 @@ void print_menu();
 int main(int ac, char** av) {
 
   std::string fname, action;
-  DPULONG jtag_freq;
+  DPULONG tck_period;
   
   //Declare the supported options.
   po::options_description opts("DirectC_RPi options");
   opts.add_options()
     ("help", "Produce this help message")
     ("ifile", po::value<std::string>(&fname)->default_value(""), "The input programming file name in .dat format")
-    ("freq", po::value<DPULONG>(&jtag_freq)->default_value(1), "The JTAG TCK frequency in the range [1 to 500] kHz")
+    ("period", po::value<DPULONG>(&tck_period)->default_value(1), "The JTAG TCK clok period in the range [1 to 1000] us")
     ;
   po::variables_map vm;
   po::store(po::parse_command_line(ac, av, opts), vm);
@@ -81,7 +81,7 @@ int main(int ac, char** av) {
   image_buffer = (DPUCHAR*)buffer; //init direct C buffer
   //-------------------       
 
-  set_jtag_frequency(jtag_freq);
+  set_tck_period(tck_period);
   print_menu();
 
   unsigned int action_code = 0;
