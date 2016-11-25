@@ -86,6 +86,12 @@ communications whether written or oral.
 #include "dputil.h"
 #include "stdio.h"
 
+/* 
+ * User attention:
+ * Include files needed to support hardware JTAG interface operations.
+ * 
+*/
+
 #ifdef RPI_SUPPORT
 /* RaspberryPi specific */
 #include "bcm2835.h"
@@ -97,13 +103,6 @@ communications whether written or oral.
 #define TRSTN_PIN RPI_V2_GPIO_P1_40
 
 #endif
-
-/* 
- * User attention:
- * Include files needed to support hardware JTAG interface operations.
- * 
-*/
-//#include 
 
 /* This variable is used to select external programming vs IAP programming */
 DPUCHAR hardware_interface = GPIO_SEL;
@@ -129,9 +128,17 @@ static DPUCHAR jtag_port_reg;
 
 DPULONGLONG delay = 0;
 
-void set_tck_period(DPULONG period){
-  delay = period/2; //us
-  //printf("setting delay to: %i\n", delay);
+void set_jtag_frequency(DPULONG freq){
+  if( freq == 0 ){
+    delay = 0;
+    return;
+  }
+  if( freq < 1 || freq > 500 ){
+    printf("frequency value out of range [1..500] kHz, using 100\n", freq);
+    freq = 100;
+  }
+  float period = 1./(float)freq; //ms
+  delay = period*1000/2; //us
 }
 
 DPUCHAR jtag_inp(void)
@@ -160,11 +167,10 @@ DPUCHAR jtag_inp(void)
 */
 void jtag_outp(DPUCHAR outdata)
 {
-
   #ifdef RPI_SUPPORT
   /* User Specific Code */
   uint8_t val = HIGH;
-  usleep(delay); 
+  if ( delay ) usleep(delay); 
   if( outdata & TMS ) val = HIGH; else val = LOW;
   //printf("TMS: %u", val);
   bcm2835_gpio_write(TMS_PIN, val); // TMS
@@ -174,7 +180,7 @@ void jtag_outp(DPUCHAR outdata)
   if( outdata & TCK ) val = HIGH; else val = LOW;
   //printf(" TCK: %u\n", val);
   bcm2835_gpio_write(TCLK_PIN, val); // TCLK
-  usleep(delay);
+  if( delay ) usleep(delay);
   #endif
 }
 
