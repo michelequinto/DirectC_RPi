@@ -47,7 +47,7 @@ int main(int ac, char** av) {
   opts.add_options()
     ("help", "Produce this help message")
     ("ifile", po::value<std::string>(&fname)->default_value(""), "The input programming file name in .dat format")
-    ("freq", po::value<DPULONG>(&jtag_freq)->default_value(1), "The JTAG TCK frequency in the range [1 to 500] kHz")
+    ("freq", po::value<DPULONG>(&jtag_freq)->default_value(1), "The JTAG TCK clok period in the range [1 to 500] kHz, value is not precise as it relies on sleep function.")
     ;
   po::variables_map vm;
   po::store(po::parse_command_line(ac, av, opts), vm);
